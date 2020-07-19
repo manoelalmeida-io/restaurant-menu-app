@@ -1,0 +1,1 @@
+INSERT INTO DISH (name, price) VALUES ('Coxinha', 14.90)
