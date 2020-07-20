@@ -12,5 +12,5 @@ data class Dish(
     var id: Long,
     var name: String,
     var price: Double,
-    var description: String
+    var imageFilename: String?
 )
