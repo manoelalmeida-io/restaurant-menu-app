@@ -1,24 +1,41 @@
 package com.example.restaurantmenu.menu
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.restaurantmenu.network.Dish
+import com.example.restaurantmenu.network.RestaurantApi
+import kotlinx.coroutines.*
 
 class MenuViewModel : ViewModel() {
 
-    private val _dishes = MutableLiveData<List<Dish>>()
-    val dishes: LiveData<List<Dish>>
-        get() = _dishes
+	private val _dishes = MutableLiveData<List<Dish>>()
+	val dishes: LiveData<List<Dish>>
+		get() = _dishes
 
-    init {
-        val d1 = Dish(
-            id = 1,
-            name = "example",
-            price = 18.90,
-            imageUrl = "http://192.168.1.34:8080/images/m1.png"
-        )
+	init {
+		_dishes.value = ArrayList()
 
-        _dishes.value = listOf(d1)
-    }
+		getDishes()
+	}
+
+	private fun getDishes() {
+		viewModelScope.launch {
+			val getDishesDeferred = RestaurantApi.retrofitService.getDishesAsync()
+
+			try {
+				val result = getDishesDeferred.await()
+
+				if (result.isNotEmpty()) {
+					_dishes.value = result
+				}
+
+			} catch (t: Throwable) {
+				t.printStackTrace()
+				_dishes.value = ArrayList()
+			}
+		}
+	}
 }
