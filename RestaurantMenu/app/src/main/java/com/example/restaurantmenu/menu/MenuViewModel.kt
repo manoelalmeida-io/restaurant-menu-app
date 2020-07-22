@@ -15,6 +15,10 @@ class MenuViewModel : ViewModel() {
 	val dishes: LiveData<List<Dish>>
 		get() = _dishes
 
+	private val _navigationToDetail = MutableLiveData<Long>()
+	val navigationToDetail: LiveData<Long>
+		get() = _navigationToDetail
+
 	init {
 		_dishes.value = ArrayList()
 
@@ -37,5 +41,13 @@ class MenuViewModel : ViewModel() {
 				_dishes.value = ArrayList()
 			}
 		}
+	}
+
+	fun displayDishDetails(dish: Dish) {
+		_navigationToDetail.value = dish.id
+	}
+
+	fun navigationToDetailComplete() {
+		_navigationToDetail.value = null
 	}
 }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.restaurantmenu.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment() {
@@ -21,11 +22,17 @@ class MenuFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        binding.dishesRecyclerView.adapter = MenuItemAdapter()
+        binding.dishesRecyclerView.adapter = MenuItemAdapter(OnClickListener {
+            viewModel.displayDishDetails(it)
+        })
 
-//        viewModel.dishes.observe(this, Observer {
-//
-//        })
+        viewModel.navigationToDetail.observe(viewLifecycleOwner, Observer { dishId ->
+            if (dishId != null) {
+                this.findNavController().navigate(
+                    MenuFragmentDirections.actionMenuFragmentToDetailFragment(dishId))
+                viewModel.navigationToDetailComplete()
+            }
+        })
 
         return binding.root
     }

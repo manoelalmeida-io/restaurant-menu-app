@@ -12,12 +12,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         tools:context=".menu.MenuFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/dishes_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:paddingBottom="8dp"
+            android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
