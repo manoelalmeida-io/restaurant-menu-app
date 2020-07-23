@@ -1,14 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".detail.DetailFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.restaurantmenu.detail.DetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.ActionBar"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.selectedDish.name}"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            style="@style/itemTitle"
+            tools:text="Noque Sugo" />
+
+        <ImageView
+            android:id="@+id/dish_image"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:layout_marginTop="16dp"
+            app:imgUrl="@{viewModel.selectedDish.imageUrl}"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@mipmap/ic_launcher"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toBottomOf="@id/dish_image">
+
+            <TextView
+                android:text="Preço:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/label"/>
+
+            <TextView
+                android:text="@{String.valueOf(viewModel.selectedDish.price)}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/itemPrice"
+                tools:text="R$19.90"/>
+
+            <TextView
+                android:text="Outras informações:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/label"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Adicionar ao carrinho"
+                android:layout_marginTop="16dp"
+                android:textColor="@android:color/white"
+                android:background="@color/colorAccent"
+                app:icon="@drawable/ic_add_shopping_cart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+                style="@style/Widget.MaterialComponents.Button.Icon"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

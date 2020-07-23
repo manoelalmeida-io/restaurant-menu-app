@@ -7,4 +7,6 @@
     <color name="background">#f5e4b1</color>
     <color name="card">#fec34e</color>
     <color name="cardText">#b11836</color>
+
+    <color name="title">#142517</color>
 </resources>

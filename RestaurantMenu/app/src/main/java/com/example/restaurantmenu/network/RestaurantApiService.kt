@@ -7,6 +7,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 private const val BASE_URL = "http://192.168.1.34:8080/"
 
@@ -23,6 +24,9 @@ private val retrofit = Retrofit.Builder()
 interface RestaurantApiService {
 	@GET("dishes")
 	fun getDishesAsync(): Deferred<List<Dish>>
+
+	@GET("dishes/{id}")
+	fun getDishAsync(@Path("id") id: Long): Deferred<Dish>
 }
 
 object RestaurantApi {

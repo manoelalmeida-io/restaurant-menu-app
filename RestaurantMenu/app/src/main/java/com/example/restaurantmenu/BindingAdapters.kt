@@ -14,7 +14,6 @@ import com.example.restaurantmenu.network.Dish
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Dish?>) {
   val adapter = recyclerView.adapter as MenuItemAdapter
   adapter.submitList(data)
-  Log.i("BindingAdapters", "List submitted $data")
 }
 
 @BindingAdapter("imgUrl")
