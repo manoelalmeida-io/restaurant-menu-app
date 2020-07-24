@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.restaurantmenu.network.Dish
+import com.example.restaurantmenu.network.DishFilter
 import com.example.restaurantmenu.network.RestaurantApi
 import kotlinx.coroutines.*
 
@@ -22,12 +23,12 @@ class MenuViewModel : ViewModel() {
 	init {
 		_dishes.value = ArrayList()
 
-		getDishes()
+		getDishes(DishFilter.SHOW_HOT_DRINKS)
 	}
 
-	private fun getDishes() {
+	private fun getDishes(filter: DishFilter?) {
 		viewModelScope.launch {
-			val getDishesDeferred = RestaurantApi.retrofitService.getDishesAsync()
+			val getDishesDeferred = RestaurantApi.retrofitService.getDishesAsync(filter?.value)
 
 			try {
 				val result = getDishesDeferred.await()
@@ -41,6 +42,14 @@ class MenuViewModel : ViewModel() {
 				_dishes.value = ArrayList()
 			}
 		}
+	}
+
+	fun filterDishes(filter: DishFilter?) {
+		getDishes(filter)
+	}
+
+	fun clearDishes() {
+		_dishes.value = ArrayList()
 	}
 
 	fun displayDishDetails(dish: Dish) {

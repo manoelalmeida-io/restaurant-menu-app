@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.restaurantmenu.databinding.FragmentMenuBinding
+import com.google.android.material.tabs.TabLayout
 
 class MenuFragment : Fragment() {
 
@@ -22,9 +23,12 @@ class MenuFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
         binding.dishesRecyclerView.adapter = MenuItemAdapter(OnClickListener {
             viewModel.displayDishDetails(it)
         })
+
+        binding.menuTabLayout.addOnTabSelectedListener(MenuTabSelectedListener(viewModel))
 
         viewModel.navigationToDetail.observe(viewLifecycleOwner, Observer { dishId ->
             if (dishId != null) {
