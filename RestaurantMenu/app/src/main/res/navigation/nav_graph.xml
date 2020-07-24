@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.example.restaurantmenu.menu.MenuFragment"
-        android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
+        android:label="Restaurant Menu"
+        tools:layout="@layout/fragment_menu">
         <action
             android:id="@+id/action_menuFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
