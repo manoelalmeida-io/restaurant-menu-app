@@ -1,6 +1,5 @@
 package com.example.restaurantmenu
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -25,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
     navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
+
       if (nd.id == R.id.detailFragment) {
         binding.toolbar.visibility = View.GONE
       } else {

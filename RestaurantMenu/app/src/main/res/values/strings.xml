@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Restaurant Menu</string>
+    <string name="app_name">MarsCafe</string>
     
     <!-- Tab titles -->
     <string name="tab_1">Bebidas Quentes</string>

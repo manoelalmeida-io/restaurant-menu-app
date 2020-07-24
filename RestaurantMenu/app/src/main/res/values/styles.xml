@@ -16,11 +16,21 @@
         <item name="fontFamily">@font/ubuntu_medium</item>
         <item name="android:textSize">32sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/strong</item>
     </style>
 
     <style name="itemPrice" parent="itemTitle">
         <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="toolbarTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="fontFamily">@font/ubuntu_bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="tabLayoutTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="fontFamily">@font/ubuntu_medium</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>
