@@ -6,18 +6,15 @@ import com.example.backend.extensions.toDtoList
 import com.example.backend.model.Dish
 import com.example.backend.service.DishService
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/dishes")
 class DishController(val service: DishService) {
 
   @GetMapping
-  fun all(): ResponseEntity<List<DishDto>> {
-    val dishes = service.all()
+  fun all(@RequestParam category: Int?): ResponseEntity<List<DishDto>> {
+    val dishes = service.all(category)
 
     return ResponseEntity.ok(dishes.toDtoList())
   }

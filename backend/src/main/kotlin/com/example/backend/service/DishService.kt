@@ -8,7 +8,13 @@ import org.springframework.stereotype.Service
 @Service
 class DishService(private val repository: DishRepository) {
 
-  fun all(): List<Dish> = repository.findAll()
+  fun all(category: Int?): List<Dish> {
+    category?.let {
+      return repository.findByFkCategory(it)
+    }
+
+    return repository.findAll()
+  }
 
   fun one(id: Long): Dish {
     val dish = repository.findById(id)
