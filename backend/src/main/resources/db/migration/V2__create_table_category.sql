@@ -1,0 +1,7 @@
+CREATE TABLE category (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL
+);
+
+ALTER TABLE dish ADD COLUMN fk_category INT;
+ALTER TABLE dish ADD FOREIGN KEY (fk_category) REFERENCES category(id);

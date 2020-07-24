@@ -12,7 +12,8 @@ fun Dish.toDto(): DishDto {
       id = this.id,
       name = this.name,
       price = this.price,
-      imageUrl = if (this.imageFilename.isNullOrBlank().not()) url else null
+      imageUrl = if (this.imageFilename.isNullOrBlank().not()) url else null,
+      fkCategory = this.fkCategory
   )
 }
 
