@@ -30,12 +30,6 @@ class DetailFragment : Fragment() {
 		binding.viewModel = viewModel
 		binding.lifecycleOwner = this
 
-		val navController = this.findNavController()
-		val appBarConfiguration = AppBarConfiguration(navController.graph)
-
-		binding.toolbar.setupWithNavController(navController, appBarConfiguration)
-		binding.toolbar.title = ""
-
 		return binding.root
 	}
 }

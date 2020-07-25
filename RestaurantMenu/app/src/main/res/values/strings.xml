@@ -7,4 +7,9 @@
     <string name="tab_3">Bolos</string>
     <string name="tab_4">Pastelaria</string>
     <string name="tab_5">Salgados</string>
+
+    <!-- Bottom navigation titles -->
+    <string name="page_1">Início</string>
+    <string name="page_2">Cardápio</string>
+    <string name="page_3">Carrinho</string>
 </resources>

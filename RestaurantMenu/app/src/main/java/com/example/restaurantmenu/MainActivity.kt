@@ -9,6 +9,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.restaurantmenu.databinding.ActivityMainBinding
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,10 +28,17 @@ class MainActivity : AppCompatActivity() {
 
     navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
 
+      val toolbarParams = binding.toolbar.layoutParams as AppBarLayout.LayoutParams
+
       if (nd.id == R.id.detailFragment) {
-        binding.toolbar.visibility = View.GONE
+        toolbarParams.scrollFlags = 0
+
+        binding.toolbar.title = ""
+        binding.bottomNavigation.visibility = View.GONE
       } else {
-        binding.toolbar.visibility = View.VISIBLE
+        toolbarParams.scrollFlags = (SCROLL_FLAG_SCROLL or SCROLL_FLAG_ENTER_ALWAYS)
+
+        binding.bottomNavigation.visibility = View.VISIBLE
       }
     }
   }

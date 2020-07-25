@@ -17,8 +17,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.restaurantmenu.detail.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="dishId"
             app:argType="long" />
