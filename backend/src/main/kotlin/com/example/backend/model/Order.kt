@@ -9,5 +9,8 @@ data class Order(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
     var fkCheckoutMethod: CheckoutMethod?,
-    var fkPaymentMethod: PaymentMethod?
+    var fkPaymentMethod: PaymentMethod?,
+
+    @OneToMany(mappedBy = "order")
+    var dishes: List<OrderDish>?
 )
