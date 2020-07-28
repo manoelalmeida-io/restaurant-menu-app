@@ -1,6 +1,5 @@
 package com.example.restaurantmenu.menu
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +11,12 @@ import kotlinx.coroutines.*
 
 class MenuViewModel : ViewModel() {
 
+	enum class ApiStatus { LOADING, ERROR, DONE }
+
+	private val _status = MutableLiveData<ApiStatus>()
+	val status: LiveData<ApiStatus>
+		get() = _status
+
 	private val _dishes = MutableLiveData<List<Dish>>()
 	val dishes: LiveData<List<Dish>>
 		get() = _dishes
@@ -20,6 +25,8 @@ class MenuViewModel : ViewModel() {
 	val navigationToDetail: LiveData<Long>
 		get() = _navigationToDetail
 
+	private var job: Job? = null
+
 	init {
 		_dishes.value = ArrayList()
 
@@ -27,18 +34,25 @@ class MenuViewModel : ViewModel() {
 	}
 
 	private fun getDishes(filter: DishFilter?) {
-		viewModelScope.launch {
+		if (_status.value == ApiStatus.LOADING) {
+			job?.cancel()
+		}
+
+		job = viewModelScope.launch {
 			val getDishesDeferred = RestaurantApi.retrofitService.getDishesAsync(filter?.value)
 
 			try {
+				_status.value = ApiStatus.LOADING
 				val result = getDishesDeferred.await()
 
 				if (result.isNotEmpty()) {
 					_dishes.value = result
+					_status.value = ApiStatus.DONE
 				}
 
 			} catch (t: Throwable) {
 				t.printStackTrace()
+				_status.value = ApiStatus.ERROR
 				_dishes.value = ArrayList()
 			}
 		}
