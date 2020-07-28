@@ -1,6 +1,7 @@
 package com.example.backend.controller
 
 import com.example.backend.dto.OrderDto
+import com.example.backend.dto.input.OrderDtoInput
 import com.example.backend.extensions.toDtoList
 import com.example.backend.model.Order
 import com.example.backend.service.OrderService
@@ -20,8 +21,8 @@ class OrderController(val service: OrderService) {
   }
 
   @PostMapping
-  fun create(@RequestBody order: Order): ResponseEntity<Order> {
-    val created = service.create(order)
+  fun create(@RequestBody orderInput: OrderDtoInput): ResponseEntity<Order> {
+    val created = service.create(orderInput)
 
     return ResponseEntity.status(HttpStatus.CREATED).body(created)
   }
