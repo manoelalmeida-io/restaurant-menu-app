@@ -1,6 +1,8 @@
 package com.example.restaurantmenu.detail
 
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.*
+import com.example.restaurantmenu.detail.bottomsheet.DetailBottomSheet
 import com.example.restaurantmenu.network.Dish
 import com.example.restaurantmenu.network.RestaurantApi
 import kotlinx.coroutines.launch
@@ -11,7 +13,7 @@ class DetailViewModel(private val dishId: Long) : ViewModel() {
 	val selectedDish: LiveData<Dish>
 		get() = _selectedDish
 
-	val priceString = Transformations.map(selectedDish) { dish ->
+	val priceString: LiveData<String> = Transformations.map(selectedDish) { dish ->
 		"R$%.2f".format(dish.price)
 	}
 
@@ -19,7 +21,7 @@ class DetailViewModel(private val dishId: Long) : ViewModel() {
 		getDish()
 	}
 
-	fun getDish() {
+	private fun getDish() {
 		viewModelScope.launch {
 			val getDishDeferred = RestaurantApi.retrofitService.getDishAsync(dishId)
 
@@ -30,6 +32,15 @@ class DetailViewModel(private val dishId: Long) : ViewModel() {
 			} catch (t: Throwable) {
 				t.printStackTrace()
 			}
+		}
+	}
+
+	fun openBottomSheet(supportFragmentManager: FragmentManager) {
+		val dish = selectedDish.value
+
+		if (dish != null) {
+			val bottomSheet = DetailBottomSheet(dish)
+			bottomSheet.show(supportFragmentManager, "TAG")
 		}
 	}
 }

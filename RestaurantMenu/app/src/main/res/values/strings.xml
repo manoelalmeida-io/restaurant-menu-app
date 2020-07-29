@@ -12,4 +12,8 @@
     <string name="page_1">Início</string>
     <string name="page_2">Cardápio</string>
     <string name="page_3">Carrinho</string>
+    <string name="adicionar_ao_carrinho">Adicionar ao carrinho</string>
+    <string name="unidades">Unidades</string>
+    <string name="total">Total</string>
+    <string name="fechar">Fechar</string>
 </resources>
