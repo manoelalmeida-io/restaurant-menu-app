@@ -22,9 +22,10 @@ class MainActivity : AppCompatActivity() {
     setSupportActionBar(binding.toolbar)
 
     val navController = findNavController(R.id.myNavHostFragment)
-    val appBarConfiguration = AppBarConfiguration(navController.graph)
+    val appBarConfiguration = AppBarConfiguration(binding.bottomNavigation.menu)
 
     binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+    binding.bottomNavigation.setupWithNavController(navController)
 
     navController.addOnDestinationChangedListener { _, nd: NavDestination, _ ->
 

@@ -8,6 +8,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.restaurantmenu.cart.CartItemAdapter
+import com.example.restaurantmenu.database.CartItem
 import com.example.restaurantmenu.menu.MenuItemAdapter
 import com.example.restaurantmenu.menu.MenuViewModel
 import com.example.restaurantmenu.network.Dish
@@ -15,6 +17,12 @@ import com.example.restaurantmenu.network.Dish
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Dish?>) {
   val adapter = recyclerView.adapter as MenuItemAdapter
+  adapter.submitList(data)
+}
+
+@BindingAdapter("listCart")
+fun bindCartRecyclerView(recyclerView: RecyclerView, data: List<CartItem?>) {
+  val adapter = recyclerView.adapter as CartItemAdapter
   adapter.submitList(data)
 }
 

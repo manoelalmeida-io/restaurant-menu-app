@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/menuFragment"
         android:enabled="true"
         android:title="@string/page_1"
         android:icon="@drawable/ic_home"/>
@@ -11,7 +11,7 @@
         android:title="@string/page_2"
         android:icon="@drawable/ic_chrome_reader_mode"/>
     <item
-        android:id="@+id/page_3"
+        android:id="@+id/cartFragment"
         android:enabled="true"
         android:title="@string/page_3"
         android:icon="@drawable/ic_shopping_cart"/>
