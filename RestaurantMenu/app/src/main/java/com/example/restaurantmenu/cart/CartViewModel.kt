@@ -32,4 +32,23 @@ class CartViewModel(private val dataSource: CartItemDao) : ViewModel() {
 			dataSource.getAll()
 		}
 	}
+
+	fun removeItem(position: Int) {
+		val cartItem = _cartItems.value?.get(position)
+
+		if (cartItem != null) {
+			viewModelScope.launch {
+				removeItemFromDatabase(cartItem)
+			}
+			_cartItems.value = _cartItems.value?.filterIndexed { index, _ ->
+				index != position
+			}
+		}
+	}
+
+	private suspend fun removeItemFromDatabase(cartItem: CartItem) {
+		withContext(Dispatchers.IO) {
+			dataSource.delete(cartItem)
+		}
+	}
 }

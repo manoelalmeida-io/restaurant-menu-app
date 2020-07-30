@@ -30,6 +30,8 @@ class CartFragment : Fragment() {
 
 		binding.cartRecyclerView.adapter = CartItemAdapter()
 
+		CartItemTouchHelper(viewModel).simpleCallback().attachToRecyclerView(binding.cartRecyclerView)
+
 		return binding.root
 	}
 
