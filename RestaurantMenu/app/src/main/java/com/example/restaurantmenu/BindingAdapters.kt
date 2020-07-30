@@ -3,6 +3,7 @@ package com.example.restaurantmenu
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -46,4 +47,9 @@ fun bindProgressBar(progressBar: ProgressBar, status: MenuViewModel.ApiStatus) {
   } else {
     progressBar.visibility = View.GONE
   }
+}
+
+@BindingAdapter("monetaryText")
+fun bindMonetaryTextView(textView: TextView, value: Double) {
+  textView.text = "R$%.2f".format(value)
 }
