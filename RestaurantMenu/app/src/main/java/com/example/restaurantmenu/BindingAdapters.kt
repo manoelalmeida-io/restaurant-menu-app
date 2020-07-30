@@ -1,5 +1,6 @@
 package com.example.restaurantmenu
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -22,9 +23,11 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Dish?>) {
 }
 
 @BindingAdapter("listCart")
-fun bindCartRecyclerView(recyclerView: RecyclerView, data: List<CartItem?>) {
+fun bindCartRecyclerView(recyclerView: RecyclerView, data: List<CartItem?>?) {
   val adapter = recyclerView.adapter as CartItemAdapter
   adapter.submitList(data)
+
+  if (adapter.currentList == data) adapter.notifyDataSetChanged()
 }
 
 @BindingAdapter("imgUrl")

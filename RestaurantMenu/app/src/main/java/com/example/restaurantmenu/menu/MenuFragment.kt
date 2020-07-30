@@ -72,7 +72,7 @@ class MenuFragment : Fragment() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        val selectedTab = binding.menuTabLayout.selectedTabPosition
+        val selectedTab = selectedTab
         outState.putInt(KEY_TAB_LAYOUT_POSITION, selectedTab)
     }
 }

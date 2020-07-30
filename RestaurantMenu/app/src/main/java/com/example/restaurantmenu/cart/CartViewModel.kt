@@ -12,36 +12,14 @@ import kotlinx.coroutines.withContext
 
 class CartViewModel(private val dataSource: CartItemDao) : ViewModel() {
 
-	private val _cartItems = MutableLiveData<List<CartItem?>>()
-	val cartItems: LiveData<List<CartItem?>>
-		get() = _cartItems
-
-	init {
-		_cartItems.value = ArrayList()
-		getItems()
-	}
-
-	private fun getItems() {
-		viewModelScope.launch {
-			_cartItems.value = getAllCartItems()
-		}
-	}
-
-	private suspend fun getAllCartItems(): List<CartItem> {
-		return withContext(Dispatchers.IO) {
-			dataSource.getAll()
-		}
-	}
+	val cartItems = dataSource.getAll()
 
 	fun removeItem(position: Int) {
-		val cartItem = _cartItems.value?.get(position)
+		val cartItem = cartItems.value?.get(position)
 
 		if (cartItem != null) {
 			viewModelScope.launch {
 				removeItemFromDatabase(cartItem)
-			}
-			_cartItems.value = _cartItems.value?.filterIndexed { index, _ ->
-				index != position
 			}
 		}
 	}
@@ -49,6 +27,18 @@ class CartViewModel(private val dataSource: CartItemDao) : ViewModel() {
 	private suspend fun removeItemFromDatabase(cartItem: CartItem) {
 		withContext(Dispatchers.IO) {
 			dataSource.delete(cartItem)
+		}
+	}
+
+	fun updateItem(cartItem: CartItem) {
+		viewModelScope.launch {
+			updateItemFromDatabase(cartItem)
+		}
+	}
+
+	private suspend fun updateItemFromDatabase(cartItem: CartItem) {
+		withContext(Dispatchers.IO) {
+			dataSource.update(cartItem)
 		}
 	}
 }
