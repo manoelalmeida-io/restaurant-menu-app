@@ -1,7 +1,7 @@
 package com.example.restaurantmenu.cart
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.restaurantmenu.database.CartItem
@@ -13,6 +13,10 @@ import kotlinx.coroutines.withContext
 class CartViewModel(private val dataSource: CartItemDao) : ViewModel() {
 
 	val cartItems = dataSource.getAll()
+
+	val total: LiveData<String> = Transformations.map(cartItems) {
+		"R$%.2f".format(cartItems.value?.map { it.price * it.quantity }?.sum() ?: 0)
+	}
 
 	fun removeItem(position: Int) {
 		val cartItem = cartItems.value?.get(position)

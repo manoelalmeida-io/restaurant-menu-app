@@ -18,4 +18,5 @@
     <string name="total">Total</string>
     <string name="fechar">Fechar</string>
     <string name="carrinho">Carrinho</string>
+    <string name="finalizar_compra">Finalizar compra</string>
 </resources>
