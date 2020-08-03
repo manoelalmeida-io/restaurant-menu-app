@@ -60,12 +60,13 @@
             app:layout_constraintTop_toBottomOf="@id/cart_list_price"
             app:layout_constraintStart_toEndOf="@id/cart_list_image">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btn_remove_unit"
                 android:layout_width="40dp"
                 android:layout_height="48dp"
                 android:padding="8dp"
-                app:icon="@drawable/ic_remove" />
+                app:icon="@drawable/ic_remove"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,12 +79,13 @@
                 android:fontFamily="@font/ubuntu_medium"
                 tools:text="1"/>
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btn_add_unit"
                 android:layout_width="40dp"
                 android:layout_height="48dp"
                 android:padding="8dp"
-                app:icon="@drawable/ic_add"/>
+                app:icon="@drawable/ic_add"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
 
         </LinearLayout>
 

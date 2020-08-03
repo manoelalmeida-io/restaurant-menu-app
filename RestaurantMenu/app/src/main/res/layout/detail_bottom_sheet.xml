@@ -81,12 +81,13 @@
                     android:layout_gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <com.google.android.material.button.MaterialButton
+                    <Button
                         android:id="@+id/btn_remove_unit"
                         android:layout_width="50dp"
                         android:layout_height="58dp"
                         android:padding="13dp"
-                        app:icon="@drawable/ic_remove" />
+                        app:icon="@drawable/ic_remove"
+                        style="@style/Widget.MaterialComponents.Button"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -99,12 +100,13 @@
                         android:fontFamily="@font/ubuntu_medium"
                         tools:text="1"/>
 
-                    <com.google.android.material.button.MaterialButton
+                    <Button
                         android:id="@+id/btn_add_unit"
                         android:layout_width="50dp"
                         android:layout_height="58dp"
                         android:padding="13dp"
-                        app:icon="@drawable/ic_add"/>
+                        app:icon="@drawable/ic_add"
+                        style="@style/Widget.MaterialComponents.Button"/>
 
                 </LinearLayout>
 
@@ -137,12 +139,13 @@
 
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btn_add_to_cart"
                 android:text="@string/adicionar_ao_carrinho"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                style="@style/Widget.MaterialComponents.Button"/>
 
         </LinearLayout>
 
