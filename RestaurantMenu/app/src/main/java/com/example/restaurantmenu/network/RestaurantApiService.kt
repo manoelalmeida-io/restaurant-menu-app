@@ -36,6 +36,9 @@ interface RestaurantApiService {
 
 	@GET("dishes/{id}")
 	fun getDishAsync(@Path("id") id: Long): Deferred<Dish>
+
+	@GET("home")
+	fun getHomeAsync(): Deferred<Home>
 }
 
 object RestaurantApi {

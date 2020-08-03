@@ -3,28 +3,46 @@ package com.example.restaurantmenu.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.restaurantmenu.network.Dish
+import androidx.lifecycle.viewModelScope
+import com.example.restaurantmenu.network.Home
+import com.example.restaurantmenu.network.RestaurantApi
+import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
 
-	private val _listHighlights = MutableLiveData<List<Dish?>>()
-	val listHighlights: LiveData<List<Dish?>>
-		get() = _listHighlights
+	enum class ApiStatus { LOADING, ERROR, DONE }
+
+	private val _status = MutableLiveData<ApiStatus>()
+	val status: LiveData<ApiStatus>
+		get() = _status
+
+	private val _home = MutableLiveData<Home>()
+	val home: LiveData<Home>
+		get() = _home
 
 	init {
-		_listHighlights.value = listOf(
-			Dish(
-				id = 1L,
-				name = "adfs",
-				price = 12.99,
-				imageUrl = ""
-			),
-			Dish(
-				id = 1L,
-				name = "adfs",
-				price = 12.99,
-				imageUrl = ""
-			)
+		_home.value = Home(
+			highlights = ArrayList(),
+			offers = ArrayList(),
+			drinkHints = ArrayList(),
+			savoryHints = ArrayList()
 		)
+		getHome()
+	}
+
+	private fun getHome() {
+		viewModelScope.launch {
+			val getHomeDeferred = RestaurantApi.retrofitService.getHomeAsync()
+
+			try {
+				_status.value = ApiStatus.LOADING
+				val result = getHomeDeferred.await()
+				_home.value = result
+				_status.value = ApiStatus.DONE
+			} catch (t: Throwable) {
+				t.printStackTrace()
+				_status.value = ApiStatus.ERROR
+			}
+		}
 	}
 }
