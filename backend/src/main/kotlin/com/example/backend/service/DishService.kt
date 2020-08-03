@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class DishService(private val repository: DishRepository) {
 
-  fun all(category: Int?): List<Dish> {
+  fun all(category: Int? = null): List<Dish> {
     category?.let {
       return repository.findByFkCategory(it)
     }

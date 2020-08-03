@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="dish"
+            type="com.example.restaurantmenu.network.Dish" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            app:elevation="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/cart_list_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:paddingEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/cart_list_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{dish.name}"
+                    android:fontFamily="@font/ubuntu_bold"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintStart_toEndOf="@id/cart_list_image"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Cappuccino" />
+
+                <TextView
+                    android:id="@+id/cart_list_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:textSize="16sp"
+                    app:monetaryText="@{dish.price}"
+                    app:layout_constraintStart_toEndOf="@id/cart_list_image"
+                    app:layout_constraintTop_toBottomOf="@id/cart_list_title"
+                    tools:text="R$19,60" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.restaurantmenu.cart.CartItemAdapter
 import com.example.restaurantmenu.database.CartItem
+import com.example.restaurantmenu.home.HomeItemAdapter
 import com.example.restaurantmenu.menu.MenuItemAdapter
 import com.example.restaurantmenu.menu.MenuViewModel
 import com.example.restaurantmenu.network.Dish
@@ -19,6 +20,13 @@ import com.example.restaurantmenu.network.Dish
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Dish?>) {
   val adapter = recyclerView.adapter as MenuItemAdapter
+  adapter.submitList(data)
+}
+
+@BindingAdapter("listHome")
+fun bindHomeRecyclerView(recyclerView: RecyclerView, data: List<Dish?>) {
+  Log.i("BindingAdapters", data.toString())
+  val adapter = recyclerView.adapter as HomeItemAdapter
   adapter.submitList(data)
 }
 
