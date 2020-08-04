@@ -30,17 +30,28 @@ class HomeFragment : Fragment() {
 		binding.homeSavoryList.adapter = HomeItemAdapter()
 
 		viewModel.status.observe(this.viewLifecycleOwner, Observer {
-			if (it == HomeViewModel.ApiStatus.LOADING) {
-				binding.homeContent.visibility = View.GONE
-				binding.homeProgressBar.visibility = View.VISIBLE
-			} else if (it == HomeViewModel.ApiStatus.DONE) {
-				binding.homeContent.visibility = View.VISIBLE
-				binding.homeProgressBar.visibility = View.GONE
-			} else {
-				binding.homeContent.visibility = View.GONE
-				binding.homeProgressBar.visibility = View.GONE
+			when (it) {
+				HomeViewModel.ApiStatus.LOADING -> {
+					binding.homeContent.visibility = View.GONE
+					binding.homeProgressBar.visibility = View.VISIBLE
+					binding.apiErrorLayout.root.visibility = View.GONE
+				}
+				HomeViewModel.ApiStatus.DONE -> {
+					binding.homeContent.visibility = View.VISIBLE
+					binding.homeProgressBar.visibility = View.GONE
+					binding.apiErrorLayout.root.visibility = View.GONE
+				}
+				else -> {
+					binding.homeContent.visibility = View.GONE
+					binding.homeProgressBar.visibility = View.GONE
+					binding.apiErrorLayout.root.visibility = View.VISIBLE
+				}
 			}
 		})
+
+		binding.apiErrorLayout.btnTry.setOnClickListener {
+			viewModel.getHome()
+		}
 
 		return binding.root
 	}

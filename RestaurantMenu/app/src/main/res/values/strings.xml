@@ -19,4 +19,6 @@
     <string name="fechar">Fechar</string>
     <string name="carrinho">Carrinho</string>
     <string name="finalizar_compra">Finalizar compra</string>
+    <string name="sem_internet">Não foi possível conectar ao servidor verifique sua conexão com a internet e tente novamente mais tarde.</string>
+    <string name="tentar_novamente">Tentar novamente</string>
 </resources>

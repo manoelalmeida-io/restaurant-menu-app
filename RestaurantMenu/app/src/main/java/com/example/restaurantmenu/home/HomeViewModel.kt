@@ -30,7 +30,7 @@ class HomeViewModel : ViewModel() {
 		getHome()
 	}
 
-	private fun getHome() {
+	fun getHome() {
 		viewModelScope.launch {
 			val getHomeDeferred = RestaurantApi.retrofitService.getHomeAsync()
 

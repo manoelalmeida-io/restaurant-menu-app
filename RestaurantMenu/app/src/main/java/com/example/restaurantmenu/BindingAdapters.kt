@@ -1,9 +1,7 @@
 package com.example.restaurantmenu
 
 import android.util.Log
-import android.view.View
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -14,7 +12,6 @@ import com.example.restaurantmenu.cart.CartItemAdapter
 import com.example.restaurantmenu.database.CartItem
 import com.example.restaurantmenu.home.HomeItemAdapter
 import com.example.restaurantmenu.menu.MenuItemAdapter
-import com.example.restaurantmenu.menu.MenuViewModel
 import com.example.restaurantmenu.network.Dish
 
 @BindingAdapter("listData")
@@ -48,15 +45,6 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .error(R.drawable.ic_broken_image)
         )
         .into(imgView)
-  }
-}
-
-@BindingAdapter("apiStatus")
-fun bindProgressBar(progressBar: ProgressBar, status: MenuViewModel.ApiStatus) {
-  if (status == MenuViewModel.ApiStatus.LOADING) {
-    progressBar.visibility = View.VISIBLE
-  } else {
-    progressBar.visibility = View.GONE
   }
 }
 

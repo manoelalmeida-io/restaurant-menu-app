@@ -33,7 +33,7 @@ class MenuViewModel : ViewModel() {
 		getDishes(DishFilter.SHOW_HOT_DRINKS)
 	}
 
-	private fun getDishes(filter: DishFilter?) {
+	fun getDishes(filter: DishFilter?) {
 		if (_status.value == ApiStatus.LOADING) {
 			job?.cancel()
 		}
