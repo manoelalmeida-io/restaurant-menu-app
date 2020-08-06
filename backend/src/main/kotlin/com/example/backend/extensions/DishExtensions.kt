@@ -4,7 +4,7 @@ import com.example.backend.dto.DishDto
 import com.example.backend.model.Dish
 
 fun Dish.toDto(): DishDto {
-  val hostname = "192.168.1.34"
+  val hostname = "192.168.0.100"
   val port = "8080"
   val url = "http://$hostname:$port/images/${this.imageFilename}"
 
