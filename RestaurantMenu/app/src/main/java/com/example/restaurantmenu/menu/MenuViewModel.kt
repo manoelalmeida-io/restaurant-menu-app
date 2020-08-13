@@ -43,6 +43,7 @@ class MenuViewModel : ViewModel() {
 
 			try {
 				_status.value = ApiStatus.LOADING
+				_dishes.value = ArrayList()
 				val result = getDishesDeferred.await()
 
 				if (result.isNotEmpty()) {

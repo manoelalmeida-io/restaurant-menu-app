@@ -16,6 +16,8 @@ import com.example.restaurantmenu.network.Dish
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Dish?>) {
+  Log.i("BindingAdapters", "data: $data")
+
   val adapter = recyclerView.adapter as MenuItemAdapter
   adapter.submitList(data)
 }

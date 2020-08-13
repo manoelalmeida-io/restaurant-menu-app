@@ -29,31 +29,42 @@ class HomeController(private val dishService: DishService) {
   }
 
   fun highlights(all: List<Dish>): List<DishDto> {
-    val random = Random(seed = randomSeed())
-    val randomIndexes = List(4) { random.nextInt(all.size) }
-
-    return randomIndexes.map { all[it].toDto() }
+    return populateList(all, uniqueIdentity = 1)
   }
 
   fun offers(all: List<Dish>): List<DishDto> {
-    val random = Random(seed = randomSeed() * 2)
-    val randomIndexes = List(4) { random.nextInt(all.size) }
-
-    return randomIndexes.map { all[it].toDto() }
+    return populateList(all, uniqueIdentity = 2)
   }
 
   fun drinkHints(all: List<Dish>): List<DishDto> {
-    val filteredList = all.filter { listOf(1, 2).contains(it.fkCategory) }
-    val random = Random(seed = randomSeed() * 3)
-    val randomIndexes = List(4) { random.nextInt(filteredList.size) }
-
-    return randomIndexes.map { filteredList[it].toDto() }
+    return populateList(all, uniqueIdentity = 3, categories = *intArrayOf(1, 2))
   }
 
   fun savoryHints(all: List<Dish>): List<DishDto> {
-    val filteredList = all.filter { it.fkCategory == 5 }
-    val random = Random(seed = randomSeed() * 4)
-    val randomIndexes = List(4) { random.nextInt(filteredList.size) }
+    return populateList(all, uniqueIdentity = 4, categories = *intArrayOf(5))
+  }
+
+  fun populateList(all: List<Dish>,
+                   size: Int = 4,
+                   uniqueIdentity: Int,
+                   vararg categories: Int): List<DishDto> {
+
+    var filteredList = all
+
+    if (categories.isNotEmpty()) {
+      filteredList = all.filter { categories.contains(it.fkCategory ?: 0) }
+    }
+
+    val random = Random(seed = randomSeed() * uniqueIdentity)
+    val randomIndexes = mutableListOf<Int>()
+
+    while (randomIndexes.size < size) {
+      val index = random.nextInt(filteredList.size)
+
+      if (randomIndexes.contains(index).not()) {
+        randomIndexes.add(index)
+      }
+    }
 
     return randomIndexes.map { filteredList[it].toDto() }
   }

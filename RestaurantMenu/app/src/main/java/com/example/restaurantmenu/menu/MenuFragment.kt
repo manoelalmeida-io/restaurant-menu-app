@@ -53,17 +53,14 @@ class MenuFragment : Fragment() {
 				MenuViewModel.ApiStatus.LOADING -> {
 					binding.apiErrorLayout.root.visibility = View.GONE
 					binding.progressIndicator.visibility = View.VISIBLE
-					binding.dishesRecyclerView.visibility = View.GONE
 				}
 				MenuViewModel.ApiStatus.DONE -> {
 					binding.apiErrorLayout.root.visibility = View.GONE
 					binding.progressIndicator.visibility = View.GONE
-					binding.dishesRecyclerView.visibility = View.VISIBLE
 				}
 				else -> {
 					binding.apiErrorLayout.root.visibility = View.VISIBLE
 					binding.progressIndicator.visibility = View.GONE
-					binding.dishesRecyclerView.visibility = View.GONE
 				}
 			}
 		})

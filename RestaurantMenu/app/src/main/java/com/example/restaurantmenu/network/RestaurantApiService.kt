@@ -10,7 +10,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-private const val BASE_URL = "http://192.168.1.34:8080/"
+private const val BASE_URL = "http://192.168.0.100:8080/"
 
 enum class DishFilter(val value: Int) {
 	SHOW_HOT_DRINKS(1),
@@ -39,6 +39,9 @@ interface RestaurantApiService {
 
 	@GET("home")
 	fun getHomeAsync(): Deferred<Home>
+
+	@GET("suggestions/{id}")
+	fun getSuggestionsAsync(@Path("id") id: Long): Deferred<List<Dish>>
 }
 
 object RestaurantApi {

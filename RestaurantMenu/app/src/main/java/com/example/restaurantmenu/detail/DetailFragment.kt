@@ -17,6 +17,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.restaurantmenu.R
 import com.example.restaurantmenu.databinding.FragmentDetailBinding
 import com.example.restaurantmenu.detail.bottomsheet.DetailBottomSheet
+import com.example.restaurantmenu.menu.MenuFragmentDirections
+import com.example.restaurantmenu.menu.MenuItemAdapter
+import com.example.restaurantmenu.menu.OnClickListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class DetailFragment : Fragment() {
@@ -38,6 +41,19 @@ class DetailFragment : Fragment() {
 		binding.addCartButton.setOnClickListener {
 			viewModel.openBottomSheet(this.requireActivity().supportFragmentManager)
 		}
+
+		binding.suggestionsRecyclerView.adapter = MenuItemAdapter(OnClickListener {
+			viewModel.displayDishDetails(it)
+		})
+
+		viewModel.navigationToDetail.observe(viewLifecycleOwner, Observer { dishId ->
+			if (dishId != null) {
+				this.findNavController().navigate(
+					MenuFragmentDirections.actionMenuFragmentToDetailFragment(dishId)
+				)
+				viewModel.navigationToDetailComplete()
+			}
+		})
 
 		return binding.root
 	}

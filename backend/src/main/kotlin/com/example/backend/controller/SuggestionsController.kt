@@ -25,7 +25,15 @@ class SuggestionsController(private val dishService: DishService) {
 
   fun randomSuggestions(all: List<Dish>, id: Long): List<DishDto> {
     val random = Random(seed = randomSeed(id))
-    val randomIndexes = List(6) { random.nextInt(all.size) }
+    val randomIndexes = mutableListOf<Int>()
+
+    while (randomIndexes.size < 6) {
+      val index = random.nextInt(all.size)
+
+      if (randomIndexes.contains(index).not()) {
+        randomIndexes.add(index)
+      }
+    }
 
     return randomIndexes.map { all[it].toDto() }
   }
