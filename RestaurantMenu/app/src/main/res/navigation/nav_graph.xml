@@ -27,6 +27,9 @@
         <argument
             android:name="dishId"
             app:argType="long" />
+        <action
+            android:id="@+id/action_detailFragment_self"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
@@ -51,5 +54,8 @@
         <action
             android:id="@+id/action_homeFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

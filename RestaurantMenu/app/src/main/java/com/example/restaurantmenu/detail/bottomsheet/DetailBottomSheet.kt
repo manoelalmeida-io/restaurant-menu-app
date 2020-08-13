@@ -10,7 +10,18 @@ import com.example.restaurantmenu.databinding.DetailBottomSheetBinding
 import com.example.restaurantmenu.network.Dish
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class DetailBottomSheet(private val dish: Dish) : BottomSheetDialogFragment() {
+class DetailBottomSheet : BottomSheetDialogFragment() {
+
+	companion object {
+
+		fun newInstance(dish: Dish): DetailBottomSheet {
+			val args = Bundle()
+			args.putParcelable("dish", dish)
+			val detailBottomSheet = DetailBottomSheet()
+			detailBottomSheet.arguments = args
+			return detailBottomSheet
+		}
+	}
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -22,7 +33,7 @@ class DetailBottomSheet(private val dish: Dish) : BottomSheetDialogFragment() {
 		val application = requireNotNull(this.activity).application
 		val dataSource = AppDatabase.getDatabase(application).cartItemDao()
 
-		val viewModelFactory = DetailBottomSheetViewModelFactory(dataSource, dish)
+		val viewModelFactory = DetailBottomSheetViewModelFactory(dataSource, arguments?.getParcelable("dish")!!)
 		val viewModel = ViewModelProvider(this, viewModelFactory)
 				.get(DetailBottomSheetViewModel::class.java)
 

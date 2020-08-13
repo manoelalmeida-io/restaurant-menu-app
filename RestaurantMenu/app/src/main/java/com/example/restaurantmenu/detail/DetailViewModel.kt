@@ -69,7 +69,7 @@ class DetailViewModel(private val dishId: Long) : ViewModel() {
 		val dish = selectedDish.value
 
 		if (dish != null) {
-			val bottomSheet = DetailBottomSheet(dish)
+			val bottomSheet = DetailBottomSheet.newInstance(dish)
 			bottomSheet.show(supportFragmentManager, "TAG")
 		}
 	}

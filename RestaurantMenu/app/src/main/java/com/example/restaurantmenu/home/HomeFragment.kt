@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.restaurantmenu.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -24,10 +25,14 @@ class HomeFragment : Fragment() {
 		binding.viewModel = viewModel
 		binding.lifecycleOwner = this
 
-		binding.homeHighlightList.adapter = HomeItemAdapter()
-		binding.homeOffersList.adapter = HomeItemAdapter()
-		binding.homeDrinksList.adapter = HomeItemAdapter()
-		binding.homeSavoryList.adapter = HomeItemAdapter()
+		val listClickListener = OnClickListener {
+			viewModel.displayDishDetails(it)
+		}
+
+		binding.homeHighlightList.adapter = HomeItemAdapter(listClickListener)
+		binding.homeOffersList.adapter = HomeItemAdapter(listClickListener)
+		binding.homeDrinksList.adapter = HomeItemAdapter(listClickListener)
+		binding.homeSavoryList.adapter = HomeItemAdapter(listClickListener)
 
 		viewModel.status.observe(this.viewLifecycleOwner, Observer {
 			when (it) {
@@ -46,6 +51,15 @@ class HomeFragment : Fragment() {
 					binding.homeProgressBar.visibility = View.GONE
 					binding.apiErrorLayout.root.visibility = View.VISIBLE
 				}
+			}
+		})
+
+		viewModel.navigateToDetail.observe(this.viewLifecycleOwner, Observer {
+			if (it != null) {
+				this.findNavController().navigate(
+					HomeFragmentDirections.actionHomeFragmentToDetailFragment(it)
+				)
+				viewModel.navigateToDetailCompleted()
 			}
 		})
 

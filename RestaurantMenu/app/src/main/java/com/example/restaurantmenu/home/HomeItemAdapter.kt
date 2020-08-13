@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantmenu.databinding.HomeListItemBinding
 import com.example.restaurantmenu.network.Dish
 
-class HomeItemAdapter : ListAdapter<Dish, HomeItemViewHolder>(DiffCallback) {
+class HomeItemAdapter(private val onClickListener: OnClickListener)
+	: ListAdapter<Dish, HomeItemViewHolder>(DiffCallback) {
 
 	companion object DiffCallback : DiffUtil.ItemCallback<Dish>() {
 		override fun areItemsTheSame(oldItem: Dish, newItem: Dish): Boolean {
@@ -26,6 +27,9 @@ class HomeItemAdapter : ListAdapter<Dish, HomeItemViewHolder>(DiffCallback) {
 
 	override fun onBindViewHolder(holder: HomeItemViewHolder, position: Int) {
 		val dish = getItem(position)
+		holder.itemView.setOnClickListener {
+			onClickListener.onClick(dish)
+		}
 		holder.bind(dish)
 	}
 }
@@ -36,4 +40,8 @@ class HomeItemViewHolder(private val binding: HomeListItemBinding) : RecyclerVie
 		binding.dish = dish
 		binding.executePendingBindings()
 	}
+}
+
+class OnClickListener(private val clickListener: (dish: Dish) -> Unit) {
+	fun onClick(dish: Dish) = clickListener(dish)
 }

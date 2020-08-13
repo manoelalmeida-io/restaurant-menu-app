@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.restaurantmenu.network.Dish
 import com.example.restaurantmenu.network.Home
 import com.example.restaurantmenu.network.RestaurantApi
 import kotlinx.coroutines.launch
@@ -19,6 +20,10 @@ class HomeViewModel : ViewModel() {
 	private val _home = MutableLiveData<Home>()
 	val home: LiveData<Home>
 		get() = _home
+
+	private val _navigateToDetail = MutableLiveData<Long>()
+	val navigateToDetail: LiveData<Long>
+		get() = _navigateToDetail
 
 	init {
 		_home.value = Home(
@@ -44,5 +49,13 @@ class HomeViewModel : ViewModel() {
 				_status.value = ApiStatus.ERROR
 			}
 		}
+	}
+
+	fun displayDishDetails(dish: Dish) {
+		_navigateToDetail.value = dish.id
+	}
+
+	fun navigateToDetailCompleted() {
+		_navigateToDetail.value = null
 	}
 }
